@@ -1,0 +1,5 @@
+select tanggal, nama_pelanggan, nama_jenis, berat, harga_total, nama_pegawai 
+from transaksi, pelanggan, jenis_cucian, pegawai
+where transaksi.id_pegawai = pegawai.id_pegawai and 
+transaksi.id_pelanggan = pelanggan.id_pelanggan and
+transaksi.id_jenis = jenis_cucian.id_jenis;

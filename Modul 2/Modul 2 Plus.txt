@@ -1,0 +1,5 @@
+insert into transaksi values (111,10,1010,120,sysdate,3,2500,5000,2500);
+
+select * from transaksi where tanggal between TO_DATE ('2018/05/02', 'yyyy/mm/dd') and TO_DATE ('2018/05/06', 'yyyy/mm/dd');
+
+select sum(harga_total) as harga_Total from transaksi;

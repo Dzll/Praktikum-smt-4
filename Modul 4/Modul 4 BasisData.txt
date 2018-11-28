@@ -1,0 +1,35 @@
+CREATE OR REPLACE PACKAGE pack_pelanggan AS
+  PROCEDURE pro (id NUMBER, nama VARCHAR, alamat VARCHAR, nohp NUMBER);
+  FUNCTION fun (id NUMBER) RETURN NUMBER;
+END pack_pelanggan;
+/
+ 
+CREATE OR REPLACE PACKAGE BODY pack_pelanggan AS
+  PROCEDURE pro (id NUMBER, nama VARCHAR, alamat VARCHAR, nohp NUMBER) AS
+  BEGIN
+    INSERT INTO pelanggan VALUES (id,nama,alamat,nohp);
+  END pro;
+  FUNCTION fun (id IN NUMBER) RETURN NUMBER IS
+  tabel NUMBER;
+  BEGIN
+    SELECT id_pelanggan INTO tabel FROM pelanggan WHERE id_Pelanggan = id;
+    return tabel;
+  END fun;
+END pack_pelanggan;
+/
+
+ALTER PACKAGE pack_pelanggan COMPILE PACKAGE;
+
+set serveroutput on;
+
+create or replace trigger tr_pelanggan 
+before insert on pelanggan
+for each row 
+begin 
+dbms_output.put_line('-----------------------------------');
+dbms_output.put_line('Data Pelanggan Berhasil di Input !!');
+dbms_output.put_line('-----------------------------------');
+end;
+/
+
+ 

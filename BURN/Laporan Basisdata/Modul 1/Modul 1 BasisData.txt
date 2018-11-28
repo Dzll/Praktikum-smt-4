@@ -1,0 +1,40 @@
+create tablespace TB_6657 datafile 'C:\app\OracleDB\oradata\orcl\TB_6657.DBF' size 100m;
+create user wafi_6657 identified by wafi_6657 default tablespace TB_6657;
+grant create session to wafi_6657;
+grant resource to wafi_6657;
+
+create table pegawai (
+id_pegawai int primary key,
+nama_pegawai varchar(20) not null,
+alamat_pegawai varchar(20) not null,
+nohp_pegawai numeric(12) not null
+);
+
+create table transaksi (
+no_transaksi int primary key,
+id_pegawai int,
+id_pelanggan int,
+id_jenis int,
+tanggal date,
+berat smallInt,
+harga_total int,
+pembayaran int,
+kembalian int
+);
+
+create table jenis_cucian (
+id_jenis int primary key,
+nama_jenis varchar(20),
+harga int
+);
+
+create table pelanggan (
+id_pelanggan int primary key,
+nama_pelanggan varchar(20) not null,
+alamat_pelanggan varchar(20) not null,
+nohp_pelanggan numeric(12) not null
+);
+
+alter table transaksi add constraint id_pegawai_fk foreign key (id_pegawai) references pegawai(id_pegawai);
+alter table transaksi add constraint id_pelanggan_fk foreign key (id_pelanggan) references pelanggan(id_pelanggan);
+alter table transaksi add constraint id_jenis_fk foreign key (id_jenis) references jenis_cucian(id_jenis);

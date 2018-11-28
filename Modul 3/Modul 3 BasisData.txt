@@ -1,0 +1,89 @@
+Insert all 
+into pegawai values (1,'A','Gresik',0815198171)
+into pegawai values (2,'B','Gresik',0815198172)
+into pegawai values (3,'C','Gresik',0815198173)
+into pegawai values (4,'D','Gresik',0815198174)
+into pegawai values (5,'E','Gresik',0815198175)
+into pegawai values (6,'F','Gresik',0815198176)
+into pegawai values (7,'G','Gresik',08151981717)
+into pegawai values (8,'H','Gresik',0815198177)
+into pegawai values (9,'I','Gresik',0815198175)
+into pegawai values (10,'J','Gresik',0815198173)
+select 1 from dual;
+
+insert all
+into jenis_cucian values (111,'Cuci Kering',2000)
+into jenis_cucian values (112,'Cuci Basah',2000)
+into jenis_cucian values (113,'Setrika Saja',2000)
+into jenis_cucian values (114,'Cuci Setrika',2000)
+into jenis_cucian values (115,'Setrika Saja',2000)
+into jenis_cucian values (116,'Cuci Kering',2000)
+into jenis_cucian values (117,'Cuci Setrika',2000)
+into jenis_cucian values (118,'Cuci Setrika',2000)
+into jenis_cucian values (119,'Cuci Basah',2000)
+into jenis_cucian values (120,'Cuci Kering',2000)
+select 1 from dual;
+
+insert all
+into pelanggan values (1001,'Si A','Surabaya City',083830678678)
+into pelanggan values (1002,'Si B','Surabaya City',083830678678)
+into pelanggan values (1003,'Si C','Surabaya City',083830678678)
+into pelanggan values (1004,'Si D','Surabaya City',083830678678)
+into pelanggan values (1005,'Si E','Surabaya City',083830678678)
+into pelanggan values (1006,'Si F','Surabaya City',083830678678)
+into pelanggan values (1007,'Si G','Surabaya City',083830678678)
+into pelanggan values (1008,'Si H','Surabaya City',083830678678)
+into pelanggan values (1009,'Si I','Surabaya City',083830678678)
+into pelanggan values (1010,'Si J','Surabaya City',083830678678)
+select 1 from dual;
+
+insert all 
+into transaksi values (101,1,1001,111,sysdate,3,2500,5000,2500)
+into transaksi values (102,2,1002,112,sysdate,4,2500,5000,2500)
+into transaksi values (103,3,1003,113,sysdate,2,2500,5000,2500)
+into transaksi values (104,4,1004,114,sysdate,1,2500,5000,2500)
+into transaksi values (105,5,1005,115,sysdate,5,2500,5000,2500)
+into transaksi values (106,6,1006,116,sysdate,2,2500,5000,2500)
+into transaksi values (107,7,1007,117,sysdate,1,2500,5000,2500)
+into transaksi values (108,8,1008,118,sysdate,8,2500,5000,2500)
+into transaksi values (109,9,1009,119,sysdate,1,2500,5000,2500)
+into transaksi values (110,10,1010,120,sysdate,3,2500,5000,2500)
+select 1 from dual;
+
+select no_transaksi, tanggal, nama_pelanggan, nama_jenis, berat, (berat * harga) as total from
+transaksi, pelanggan, jenis_cucian where 
+transaksi.no_transaksi between 103 and 107;
+
+select a1.id_jenis, a2.nama_jenis, a1.harga from jenis_cucian a1, jenis_cucian a2 where a1.id_jenis = a2.id_jenis;
+select a1.id_jenis, a2.nama_jenis, a1.harga from jenis_cucian a1, jenis_cucian a2 where a1.id_jenis > a2.id_jenis;
+select a1.id_jenis, a2.nama_jenis, a1.harga from jenis_cucian a1, jenis_cucian a2 where a1.id_jenis < a2.id_jenis;
+select a1.id_jenis, a2.nama_jenis, a1.harga from jenis_cucian a1, jenis_cucian a2 where a1.id_jenis <= a2.id_jenis;
+select a1.id_jenis, a2.nama_jenis, a1.harga from jenis_cucian a1, jenis_cucian a2 where a1.id_jenis >= a2.id_jenis;
+
+set serveroutput on;
+
+CREATE or replace Procedure genap(range number)
+AS  
+x NUMBER := 0;
+BEGIN
+   dbms_output.put_line('--------------------------------------');
+   dbms_output.put_line('>> Range ' || x || ' - ' || range || ' Genap Output ->');
+   dbms_output.put_line('--------------------------------------');
+   FOR i IN 1..range LOOP
+      x := (x + 1);
+	  if mod(x,2)=0 then
+	  dbms_output.put_line(' ' || x);
+	  end if;
+   END LOOP;
+   dbms_output.put_line('--------------------------------------');
+   if mod(range,2)!=0 then
+   dbms_output.put_line('>> ('|| range ||') Adalah Angka Ganjil');
+   end if;
+END;
+/
+
+execute genap(12);
+
+
+
+
